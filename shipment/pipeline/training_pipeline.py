@@ -29,7 +29,6 @@ from shipment.configuration.s3_operations import S3Operation
 from shipment.components.model_pusher import ModelPusher
 
 
-
 class TrainPipeline:
     def __init__(self):
         self.data_ingestion_config = DataIngestionConfig()
@@ -41,8 +40,8 @@ class TrainPipeline:
         self.s3_operations = S3Operation()
         self.mongo_op = MongoDBOperation()
 
-
-        # This method is used to start the data ingestion
+    
+    # This method is used to start the data ingestion
     def start_data_ingestion(self) -> DataIngestionArtifacts:
         logging.info("Entered the start_data_ingestion method of TrainPipeline class")
         try:
@@ -57,8 +56,8 @@ class TrainPipeline:
 
         except Exception as e:
             raise shippingException(e, sys) from e
-        
-         # This method is used to start the data validation
+
+     # This method is used to start the data validation
     def start_data_validation(
         self, data_ingestion_artifact: DataIngestionArtifacts
     ) -> DataValidationArtifacts:
@@ -77,7 +76,8 @@ class TrainPipeline:
 
         except Exception as e:
             raise shippingException(e, sys) from e
-        
+
+
      # This method is used to start the data transformation
     def start_data_transformation(
         self, data_ingestion_artifact: DataIngestionArtifacts
@@ -100,7 +100,8 @@ class TrainPipeline:
 
         except Exception as e:
             raise shippingException(e, sys) from e
-        
+
+    
     # This method is used to start the model trainer
     def start_model_trainer(
         self, data_transformation_artifact: DataTransformationArtifacts

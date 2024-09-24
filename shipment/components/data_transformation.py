@@ -16,19 +16,21 @@ from shipment.exception import shippingException
 
 
 
-class DataTransfomration:
+class DataTransformation:
     def __init__(
-            self,
-            data_ingestion_artifacts: DataIngestionArtifacts,
-            data_transformation_config: DataTransformationConfig
+        self,
+        data_ingestion_artifacts: DataIngestionArtifacts,
+        data_transformation_config: DataTransformationConfig,
     ):
-        
-        self.data_ingestion_artifcats = data_ingestion_artifacts
+
+        self.data_ingestion_artifacts = data_ingestion_artifacts
         self.data_transformation_config = data_transformation_config
 
-        self.train_set = pd.read_csv(self.data_ingestion_artifcats.train_data_file_path)
-        self.test_set = pd.read_csv(self.data_ingestion_artifcats.test_data_file_path)
+        # Reading train.csv and test.csv from data ingestion artifacts
+        self.train_set = pd.read_csv(self.data_ingestion_artifacts.train_data_file_path)
+        self.test_set = pd.read_csv(self.data_ingestion_artifacts.test_data_file_path)
 
+    # This method is used to get the transformer object
     def get_data_transformer_object(self) -> object:
 
         """
@@ -79,7 +81,7 @@ class DataTransfomration:
 
         except Exception as e:
             raise shippingException(e, sys) from e
-        
+
     # This is static method for capping the outliers
     @staticmethod
     def _outlier_capping(col, df: DataFrame) -> DataFrame:
@@ -238,4 +240,3 @@ class DataTransfomration:
 
         except Exception as e:
             raise shippingException(e, sys) from e
-
