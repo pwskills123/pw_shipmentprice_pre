@@ -19,5 +19,5 @@ RUN pip install -r requirements.txt
 # Now copy the rest of the application files
 COPY . /app
 
-# Command to run the application
+# Command to run the application in runner
 CMD ["python3", "app.py"]
